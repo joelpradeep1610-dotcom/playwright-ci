@@ -1,0 +1,24 @@
+[{
+"productName": "ZARA COAT 3",
+    "username" : "joel@joel.com",
+    "password" : "Password@1",
+    "countryName" : "India",
+    "expiryDate" : ["07","31"],
+    "cvvCode" : "123",
+    "cardName" : "Joel Pradeep",
+    "countrySequence" : "Ind"
+
+},
+{
+"productName": "iphone 13 pro",
+    "username" : "bryanadams@gmail.com",
+    "password" : "Welcome@1234",
+    "countryName" : "India",
+    "expiryDate" : ["06","30"],
+    "cvvCode" : "126",
+    "cardName" : "Bryan Adams",
+    "countrySequence" : "Ind"
+
+}
+
+]
