@@ -10,7 +10,7 @@ import testData from '../Utils/ClientLoginTestData.json';
 
 for(const data of testData)
 {
-test(`Login Authentication for ${data.productName}`, async ({ page }) => {
+test.only(`Login Authentication for ${data.productName}`, async ({ page }) => {
 
   // login page
   const loginPage = new LoginPage(page);
