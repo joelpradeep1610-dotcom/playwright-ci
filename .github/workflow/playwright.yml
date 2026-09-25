@@ -1,0 +1,56 @@
+name: Playwright Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:   # 👈 allows manual trigger with inputs
+    inputs:
+      testFile:
+        description: 'Test file to run (e.g. tests/example.spec.ts)'
+        required: false
+        default: ''
+      grep:
+        description: 'Test title pattern (e.g. "should login")'
+        required: false
+        default: ''
+
+jobs:
+  test:
+    runs-on: windows-latest   # 👈 using Windows runner
+
+    steps:
+name: Checkout repository
+        uses: actions/checkout@v4
+
+name: Setup Node.js
+        uses: actions/setup-node@v4 
+        with:
+          node-version: 20
+
+name: Install dependencies
+        run: npm install
+
+name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+name: Run Playwright tests
+        run: |
+          $cmd = "npx playwright test example.spec.js --project=chromium"
+          if ("${{ github.event.inputs.testFile }}" -ne "") {
+            $cmd = "$cmd ${{ github.event.inputs.testFile }}"
+          }
+          if ("${{ github.event.inputs.grep }}" -ne "") {
+            $cmd = "$cmd -g '${{ github.event.inputs.grep }}'"
+          }
+          echo "Running: $cmd"
+          Invoke-Expression $cmd
+
+name: Upload Playwright HTML Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
