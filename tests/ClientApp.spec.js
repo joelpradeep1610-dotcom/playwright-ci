@@ -49,7 +49,7 @@ test("UI Controls",async ({page}) =>
 
 } )
 
-test.only("Handling child window", async ({browser}) =>
+test("Handling child window", async ({browser}) =>
 {
     const context = await browser.newContext();
     const page = await context.newPage();
